@@ -17,7 +17,7 @@ public class UserLoginTest {
                 .createUser(email, password, name)
                 .statusCode(200);
         userSteps
-                .loginUser(email, password, name)
+                .loginUser(email, password)
                 .statusCode(200)
                 .body("success", is(true));
     }
@@ -29,14 +29,14 @@ public class UserLoginTest {
                 .createUser(email, password, name)
                 .statusCode(200);
         userSteps
-                .loginUser("email", "password", name)
+                .loginUser("email", "password")
                 .statusCode(401)
                 .body("message", is("email or password are incorrect"));
     }
 
     @After
     public void tearDown() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         if (token != null) {
             userSteps.deleteUser(token);

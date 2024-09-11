@@ -44,7 +44,7 @@ public class UserEditTest {
 
     @Test
     public void userEmailEditOk() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         userSteps
                 .userDataEdit("email", password, name, token)
@@ -58,7 +58,7 @@ public class UserEditTest {
 
     @Test
     public void userPasswordEditOk() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         userSteps
                 .userDataEdit(email, "password", name, token)
@@ -72,7 +72,7 @@ public class UserEditTest {
 
     @Test
     public void userNameEditOk() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         userSteps
                 .userDataEdit(email, password, "name", token)
@@ -86,7 +86,7 @@ public class UserEditTest {
 
     @After
     public void tearDown() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         if (token != null) {
             userSteps.deleteUser(token);

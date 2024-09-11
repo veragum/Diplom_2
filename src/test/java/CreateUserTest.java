@@ -47,7 +47,7 @@ public class CreateUserTest {
 
     @After
     public void tearDown() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         if (token != null) {
             userSteps.deleteUser(token);

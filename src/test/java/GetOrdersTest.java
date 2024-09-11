@@ -23,7 +23,7 @@ public class GetOrdersTest {
                 .statusCode(200);
         List<String> ingredients = orderSteps.getIngredients();
         Collections.shuffle(ingredients);
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         orderSteps
                 .createOrder(token, List.of(ingredients.get(0), ingredients.get(1)))
@@ -33,7 +33,7 @@ public class GetOrdersTest {
     @Test
     @DisplayName("Получение заказов авторизованного пользователя")
     public void getOrderFromAuthUser() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         orderSteps
                 .getOrder(token)
@@ -53,7 +53,7 @@ public class GetOrdersTest {
 
     @After
     public void tearDown() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         if (token != null) {
             userSteps.deleteUser(token);

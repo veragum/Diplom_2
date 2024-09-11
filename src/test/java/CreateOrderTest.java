@@ -30,7 +30,7 @@ public class CreateOrderTest {
     public void createOrderAuthWithIngredients() {
         List<String> ingredients = orderSteps.getIngredients();
         Collections.shuffle(ingredients);
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         orderSteps
                 .createOrder(token, List.of(ingredients.get(0), ingredients.get(1)))
@@ -41,7 +41,7 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Создание заказа без ингридиентов авторизованным пользователем")
     public void createOrderAuthWithoutIngredients() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         orderSteps
                 .createOrder(token, new ArrayList<>())
@@ -74,7 +74,7 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Создание заказа с неверным хешем ингредиентов")
     public void createOrderAuthWithIncorrectHash() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         String response = orderSteps
                 .createOrder(token, List.of("dfdgr"))
@@ -85,7 +85,7 @@ public class CreateOrderTest {
 
     @After
     public void tearDown() {
-        String token = userSteps.loginUser(email, password, name)
+        String token = userSteps.loginUser(email, password)
                 .extract().body().path("accessToken");
         if (token != null) {
             userSteps.deleteUser(token);

@@ -28,7 +28,7 @@ public class UserSteps {
 
 
     @Step
-    public ValidatableResponse loginUser(String email, String password, String name) {
+    public ValidatableResponse loginUser(String email, String password) {
         return given()
                 .contentType(ContentType.JSON)
                 .baseUri(HOST)
